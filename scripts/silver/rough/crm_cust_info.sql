@@ -154,3 +154,49 @@ from
 	where cst_id is not null
 )a
 where a.flag_last=1;
+
+
+--rerun the quality check queries from bronze layer to verify data quality in silver layer
+--1. check primary key - must be unique and not null. should have no duplicates
+select cst_id, count(*)
+from silver.crm_cust_info 
+group by cst_id
+having count(*) > 1 or cst_id is null
+order by cst_id ;
+-----------------------------------------------
+--2.1: Check for unwanted spaces in string values
+	--Expectation: No results
+--cst_key IS FINE
+select cst_key
+from silver.crm_cust_info
+where cst_key != trim(cst_key);
+
+--cst_firstname HAS GOT UNWANTED SPACES
+select cst_firstname
+from silver.crm_cust_info
+where cst_firstname != trim(cst_firstname);
+
+--cst_lastname HAS GOT UNWANTED SPACES
+select cst_lastname
+from silver.crm_cust_info
+where cst_lastname != trim(cst_lastname);
+
+--cst_marital_status IS FINE
+select cst_marital_status
+from silver.crm_cust_info
+where cst_marital_status != trim(cst_marital_status);
+
+--CST_GNDR IS FINE
+select cst_gndr
+from silver.crm_cust_info
+where cst_gndr != trim(cst_gndr);
+-----------------------------------------------
+--3. check consistency of value in low cardinality columns
+--data standardization and consistency 
+--cst_gndr
+select distinct cst_gndr
+from silver.crm_cust_info;
+
+--cst_marital_status
+select distinct cst_marital_status
+from silver.crm_cust_info;
