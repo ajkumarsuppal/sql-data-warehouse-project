@@ -35,7 +35,7 @@ select
 	sd.sls_quantity,
 	sd.sls_price
 from silver.crm_sales_details sd
-left join gold.dim_products p on sd.sls_prd_key = p.product_num
+left join gold.dim_products p on sd.sls_prd_key = p.product_number
 left join gold.dim_customers c on sd.sls_cust_id=c.customer_id
 where p.product_key=3;
 
@@ -53,7 +53,7 @@ select
 	sd.sls_quantity as quantity,
 	sd.sls_price as price
 from silver.crm_sales_details sd
-left join gold.dim_products p on sd.sls_prd_key = p.product_num
+left join gold.dim_products p on sd.sls_prd_key = p.product_number
 left join gold.dim_customers c on sd.sls_cust_id=c.customer_id;
 
 --last step: CREATE OBJECT (virtual) -> create a view
@@ -70,7 +70,7 @@ select
 	sd.sls_quantity as quantity,
 	sd.sls_price as price
 from silver.crm_sales_details sd
-left join gold.dim_products p on sd.sls_prd_key = p.product_num
+left join gold.dim_products p on sd.sls_prd_key = p.product_number
 left join gold.dim_customers c on sd.sls_cust_id=c.customer_id;
 
 -------------------------------------------------------
