@@ -123,7 +123,7 @@ create view gold.dim_products as
 select
 	row_number() over (order by pi.prd_start_dt, pi.prd_key) as product_key,
 	pi.prd_id as product_id,
-	pi.prd_key as product_num,
+	pi.prd_key as product_number,
 	pi.prd_nm as product_name,
 	pi.cat_id as category_id,
 	pc.cat as category,
