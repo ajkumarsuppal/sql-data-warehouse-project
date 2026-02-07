@@ -85,7 +85,7 @@ having count(*) > 1;
 
 select
 	pi.prd_id as product_id,
-	pi.prd_key as product_num, --we need product_key as surrogate key later
+	pi.prd_key as product_number, --we need product_key as surrogate key later
 	pi.prd_nm as product_name,
 	pi.cat_id as category_id,
 	pc.cat as category,
@@ -104,7 +104,7 @@ where pi.prd_end_dt is NULL
 select
 	row_number() over (order by pi.prd_start_dt, pi.prd_key) as product_key,
 	pi.prd_id as product_id,
-	pi.prd_key as product_num,
+	pi.prd_key as product_number,
 	pi.prd_nm as product_name,
 	pi.cat_id as category_id,
 	pc.cat as category,
